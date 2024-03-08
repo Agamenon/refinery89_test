@@ -56,18 +56,18 @@ const submit = () =>{
              <ul class="card-actions grid grid-rows-3">
                 <div class="grid grid-cols-2 gap-1">
                     <div :class="[edition && 'tooltip']" data-tip="Link User">
-                        <button  class="btn btn-block" @click="emit('linkWithUser')">
+                        <button  :class="[!edition && 'btn-disabled']" class="btn btn-block" @click="emit('linkWithUser')">
                             Users:
                             <div class="badge badge-info">{{department?.users_count}}</div>
                         </button>
                     </div>
-                    <button class="btn">
+                    <button :class="[!edition && 'btn-disabled']" class="btn">
                         Sub:
                         <div class="badge">{{department.child_departments_count}}</div>
                     </button>
                 </div>
                 <div :class="[edition && 'tooltip']" data-tip="Change Parent">
-                    <button  class="btn btn-block" @click="emit('linkSubDepartment')" title="Change">
+                    <button  :class="[!edition && 'btn-disabled']" class="btn btn-block" @click="emit('linkSubDepartment')" title="Change">
                         Parent:
                         <div class="badge badge-secondary">{{department?.parent_department?.name ?? "Unlinked"}}</div>
                     </button>

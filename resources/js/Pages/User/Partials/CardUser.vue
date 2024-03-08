@@ -62,7 +62,7 @@ const submit = () =>{
              <ul class="card-actions">
                 <div class="grid grid-rows-1">
                     <div :class="[edition && 'tooltip']" data-tip="Link Department">
-                        <button  class="btn btn-block" @click="emit('linkSubDepartment')">
+                        <button :class="[!edition && 'btn-disabled']"  class="btn btn-block" @click="emit('linkSubDepartment')">
                             Departments:
                             <div class="badge badge-info">{{user?.departments_count}}</div>
                         </button>
