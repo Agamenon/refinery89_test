@@ -53,21 +53,23 @@ const submit = () =>{
                     </button>
                 </div>
              </form>
-             <ul class="card-actions grid grid-flow-row">
-                 <div class="tooltip" data-tip="Link User">
-                    <button  class="btn" @click="emit('linkWithUser')">
-                        Users:
-                        <div class="badge badge-info">{{department?.users_count}}</div>
+             <ul class="card-actions grid grid-rows-3">
+                <div class="grid grid-cols-2 gap-1">
+                    <div :class="[edition && 'tooltip']" data-tip="Link User">
+                        <button  class="btn btn-block" @click="emit('linkWithUser')">
+                            Users:
+                            <div class="badge badge-info">{{department?.users_count}}</div>
+                        </button>
+                    </div>
+                    <button class="btn">
+                        Sub:
+                        <div class="badge">{{department.child_departments_count}}</div>
                     </button>
                 </div>
-                <button class="btn">
-                    Sub:
-                    <div class="badge">{{department.child_departments_count}}</div>
-                </button>
-                <div class="tooltip" data-tip="Change Parent">
-                    <button  class="btn" @click="emit('linkSubDepartment')" title="Change">
+                <div :class="[edition && 'tooltip']" data-tip="Change Parent">
+                    <button  class="btn btn-block" @click="emit('linkSubDepartment')" title="Change">
                         Parent:
-                        <div class="badge badge-secondary">{{department?.parent_department?.name}}</div>
+                        <div class="badge badge-secondary">{{department?.parent_department?.name ?? "Unlinked"}}</div>
                     </button>
                 </div>
             </ul>

@@ -17,7 +17,6 @@ const form = useForm({
 })
 
 const submit = () => {
-    console.log(form);
     form.post(route('department.store'), {
         onSuccess: () => closeModal(),
         onError: () => {
@@ -28,7 +27,6 @@ const submit = () => {
 }
 
 const closeModal = () => {
-    console.log('aca');
     openModalNewDepartment.value = false;
     form.reset();
 }
