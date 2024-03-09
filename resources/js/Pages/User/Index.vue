@@ -2,13 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Paginator from '@/Components/Paginator.vue';
 import Modal from '@/Components/Modal.vue';
-import { usePage, Head, useForm } from "@inertiajs/vue3";
+import { usePage, Head, useForm, router } from "@inertiajs/vue3";
 import { computed, ref} from "vue";
 import CardUser from '@/Pages/User/Partials/CardUser.vue';
 
 const users = computed(() => usePage().props.users || []);
 const openModalNewUser = ref(false);
 const onError = ref(false);
+const query = ref('');
 
 const openModal = () => openModalNewUser.value = true;
 
@@ -27,6 +28,10 @@ const submit = () => {
     });
 }
 
+const search = () => {
+    router.get(route('user.index'),{"query":query.value},{ only: ['users'],preserveState: true });
+}
+
 const closeModal = () => {
     openModalNewUser.value = false;
     form.reset();
@@ -43,6 +48,18 @@ const closeModal = () => {
                         <div class="flex-1">
                             <h2 class="btn btn-ghost text-xl">User List</h2>
                             <Paginator :current_page="users.current_page" :prev_page="users.prev_page_url" :next_page="users.next_page_url"  />
+                        </div>
+                        <div class="flex mx-2">
+                            <div class="join">
+                                <div>
+                                    <div>
+                                        <input class="input input-bordered join-item" placeholder="Search" v-model="query" @keyup.enter="search"/>
+                                    </div>
+                                </div>
+                                <div class="indicator">
+                                    <button class="btn join-item" @click="search">Search</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex-none">
                             <ul class="grid grid-cols-1">

@@ -15,9 +15,10 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::withCount(['departments'])->with('departments')->orderBy('created_at', 'desc')->paginate(8);
+        $query = $request->query('query');
+        $users = User::withCount(['departments'])->with('departments')->when($query, fn ($sql, $query) => $sql->whereLike('name', $query))->orderBy('created_at', 'desc')->paginate(8);
         return Inertia::render('User/Index', compact('users'));
     }
 

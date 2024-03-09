@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { usePage, Head, useForm, Link, router} from "@inertiajs/vue3";
+import { usePage, Head, router} from "@inertiajs/vue3";
 import { computed, ref} from "vue";
 import CardUser from '@/Pages/User/Partials/CardUser.vue';
 import ListDepartmentChild from '@/Pages/Department/Partials/ListDepartmentChild.vue';

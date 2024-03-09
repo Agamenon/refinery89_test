@@ -2,13 +2,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Paginator from '@/Components/Paginator.vue';
 import Modal from '@/Components/Modal.vue';
-import { usePage, Head, useForm } from "@inertiajs/vue3";
+import { usePage, Head, useForm, router } from "@inertiajs/vue3";
 import { computed, ref} from "vue";
 import CardDepartment from '@/Pages/Department/Partials/CardDepartment.vue';
 
 const departments = computed(() => usePage().props.departments || []);
 const openModalNewDepartment = ref(false);
 const onError = ref(false);
+const query = ref('');
 
 const openModal = () => openModalNewDepartment.value = true;
 
@@ -24,6 +25,10 @@ const submit = () => {
             setTimeout(()=> onError.value = false,2000);
         }
     });
+}
+
+const search = () => {
+    router.get(route('department.index'),{"query":query.value},{ only: ['departments'],preserveState: true });
 }
 
 const closeModal = () => {
@@ -42,6 +47,18 @@ const closeModal = () => {
                         <div class="flex-1">
                             <h2 class="btn btn-ghost text-xl">Department List</h2>
                             <Paginator :current_page="departments.current_page" :prev_page="departments.prev_page_url" :next_page="departments.next_page_url"  />
+                        </div>
+                        <div class="flex mx-2">
+                            <div class="join">
+                                <div>
+                                    <div>
+                                        <input class="input input-bordered join-item" placeholder="Search" v-model="query" @keyup.enter="search"/>
+                                    </div>
+                                </div>
+                                <div class="indicator">
+                                    <button class="btn join-item" @click="search">Search</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex-none">
                             <ul class="grid grid-cols-1">

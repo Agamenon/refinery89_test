@@ -13,9 +13,10 @@ class DepartmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $departments = Department::withCount(['childDepartments', 'users'])->with('parentDepartment')->orderBy('created_at','desc')->paginate(8);
+        $query = $request->query('query');
+        $departments = Department::withCount(['childDepartments', 'users'])->when($query,fn($sql,$query) => $sql->whereLike('name',$query))->with('parentDepartment')->orderBy('created_at','desc')->paginate(8);
         return Inertia::render('Department/Index', compact('departments'));
     }
 
