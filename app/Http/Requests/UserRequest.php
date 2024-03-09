@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         $fieldPresent = $isStoring ? 'required' : 'sometimes';
         return [
             'name' => [$fieldPresent, 'string', (new Unique('users'))->ignore($this->route('user'))],
-            'email' => [$fieldPresent, 'email:rfc,dns', (new Unique('users'))->ignore($this->route('user'))]
+            'email' => [$fieldPresent, 'email', (new Unique('users'))->ignore($this->route('user'))]
         ];
     }
 }

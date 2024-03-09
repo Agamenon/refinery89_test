@@ -20,9 +20,9 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return redirect()->route('department.index');
-});
-Route::resource('department',DepartmentController::class)->except(['edit']);
+})->name('home');
+Route::resource('department',DepartmentController::class)->except(['edit','create']);
 Route::put('department/{department}/user/{user}/link', [DepartmentController::class, 'linkWithUser'])->name('department.linkWithUser');
 Route::put('department/{department}/user/{user}/unlink', [DepartmentController::class, 'unlinkWithUser'])->name('department.unlinkWithUser');
 Route::put('department/{department}/link/{parentDepartment}', [DepartmentController::class, 'linkWithDepartment'])->name('department.linkWithDepartment');
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)->except(['edit','create']);

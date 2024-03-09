@@ -22,14 +22,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(UserRequest $request)
@@ -46,14 +38,6 @@ class UserController extends Controller
         $user->load(['departments'])->loadCount(['departments']);
         $departments = Department::orderBy('name', 'asc')->get()->except($user->departments()->pluck('id')->toArray());
         return Inertia::render('User/Show', compact('user','departments'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
     }
 
     /**
