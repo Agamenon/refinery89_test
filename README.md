@@ -45,14 +45,15 @@ After you are in sync with `origin/main` Then you can run
 vendor/bin/sail up -d
 vendor/bin/sail shell
 php artisan migrate --seed
-php artisan db:seed UserSeeder
-php artisan db:seed DemoDataSeeder
+npm install
+npm run dev
 ```
 ### Daily usage
 After you are in sync with `origin/main` Then you can run
 Inside the shell you can run typical artisan commands like:
 ```sh
 php artisan migrate --seed
+npm run dev
 ```
 
 ### First time set up
@@ -70,10 +71,11 @@ vendor/bin/sail shell
 export XDEBUG_MODE=coverage
 php artisan test --coverage
 ```
-
-## Postman Collection
-You can find a Postman collection called `Tenet_Backend.postman_collection` to import in your Postman Workspace on root directory.
+## Library's and Packages
+* [Laravel Jetstream](https://jetstream.laravel.com/introduction.html)
+* [InertiaJs](https://inertiajs.com/)
+* [DaisUI](https://daisyui.com/)
 
 ## License
-
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
